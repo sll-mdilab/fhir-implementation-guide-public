@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<StructureDefinition xmlns="http://hl7.org/fhir">
+  <meta>
+    <lastUpdated value="2016-03-31T15:24:34.303+02:00" />
+  </meta>
+  <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm">
+    <valueInteger value="0" />
+  </extension>
+  <url value="http://sll-mdilab.net/fhir/StructureDefinition/mdi-patient-device-association" />
+  <name value="MDI PatientDeviceAssociation Profile" />
+  <status value="draft" />
+  <publisher value="SLL Medical Device Integration Lab" />
+  <date value="2016-03-21T00:00:00+01:00" />
+  <description value="Base StructureDefinition for DeviceUseStatement Resource" />
+  <fhirVersion value="1.0.1" />
+  <mapping>
+    <identity value="quick" />
+    <uri value="http://wiki.siframework.org/CQF" />
+    <name value="Quality Improvement and Clinical Knowledge (QUICK)" />
+  </mapping>
+  <mapping>
+    <identity value="w5" />
+    <uri value="http://hl7.org/fhir/w5" />
+    <name value="W5 Mapping" />
+  </mapping>
+  <mapping>
+    <identity value="rim" />
+    <uri value="http://hl7.org/v3" />
+    <name value="RIM" />
+  </mapping>
+  <kind value="resource" />
+  <constrainedType value="DeviceUseStatement" />
+  <abstract value="false" />
+  <base value="http://hl7.org/fhir/StructureDefinition/DeviceUseStatement" />
+  <differential>
+    <element>
+      <path value="DeviceUseStatement" />
+      <definition value="A record of a device being used by a patient where the record is the result of a report from the patient or another clinician." />
+      <min value="0" />
+      <max value="*" />
+      <base>
+        <path value="DeviceUseStatement" />
+        <min value="0" />
+        <max value="*" />
+      </base>
+      <type>
+        <code value="DeviceUseStatement" />
+      </type>
+      <isSummary value="true" />
+      <mapping>
+        <identity value="quick" />
+        <map value="DeviceUsePerformanceOccurrence" />
+      </mapping>
+      <mapping>
+        <identity value="w5" />
+        <map value="workflow.order" />
+      </mapping>
+    </element>
+    <element>
+      <path value="DeviceUseStatement.extension" />
+      <slicing>
+        <discriminator value="url" />
+        <rules value="openAtEnd" />
+      </slicing>
+    </element>
+    <element>
+      <path value="DeviceUseStatement.extension" />
+      <name value="issuer" />
+      <short value="Issuer" />
+      <definition value="Identifies which practitioner ensures the correctness of a patient-device association." />
+      <min value="1" />
+      <max value="1" />
+      <base>
+        <path value="DeviceUseStatement.extension" />
+        <min value="1" />
+        <max value="1" />
+      </base>
+      <type>
+        <code value="Extension" />
+        <profile value="http://sll-mdilab.net/fhir/DeviceUseStatement#issuer" />
+      </type>
+    </element>
+    <element>
+      <path value="DeviceUseStatement.bodySite[x]" />
+      <short value="Target body site" />
+      <definition value="Indicates the site on the subject's body where the device was used ( i.e. the target site)." />
+      <requirements value="Knowing where the device is targeted is important for tracking if multiple sites are possible." />
+      <min value="0" />
+      <max value="0" />
+      <base>
+        <path value="DeviceUseStatement.bodySite[x]" />
+        <min value="0" />
+        <max value="1" />
+      </base>
+      <type>
+        <code value="CodeableConcept" />
+      </type>
+      <type>
+        <code value="Reference" />
+        <profile value="http://hl7.org/fhir/StructureDefinition/BodySite" />
+      </type>
+      <isSummary value="true" />
+      <mapping>
+        <identity value="rim" />
+        <map value="targetSiteCode" />
+      </mapping>
+    </element>
+    <element>
+      <path value="DeviceUseStatement.whenUsed" />
+      <definition value="The time period over which the device was used." />
+      <min value="1" />
+      <max value="1" />
+      <base>
+        <path value="DeviceUseStatement.whenUsed" />
+        <min value="0" />
+        <max value="1" />
+      </base>
+      <type>
+        <code value="Period" />
+      </type>
+      <isSummary value="true" />
+      <mapping>
+        <identity value="quick" />
+        <map value="Performance.performanceTime" />
+      </mapping>
+      <mapping>
+        <identity value="w5" />
+        <map value="when.done" />
+      </mapping>
+    </element>
+    <element>
+      <path value="DeviceUseStatement.whenUsed.start" />
+      <short value="Starting time with inclusive boundary" />
+      <definition value="The start of the period. The boundary is inclusive." />
+      <comments value="If the low element is missing, the meaning is that the low boundary is not known." />
+      <min value="1" />
+      <max value="1" />
+      <base>
+        <path value="Period.start" />
+        <min value="0" />
+        <max value="1" />
+      </base>
+      <type>
+        <code value="dateTime" />
+      </type>
+      <condition value="per-1" />
+      <isSummary value="true" />
+      <mapping>
+        <identity value="v2" />
+        <map value="DR.1" />
+      </mapping>
+      <mapping>
+        <identity value="rim" />
+        <map value="./low" />
+      </mapping>
+    </element>
+    <element>
+      <path value="DeviceUseStatement.indication" />
+      <definition value="Reason or justification for the use of the device." />
+      <min value="0" />
+      <max value="0" />
+      <base>
+        <path value="DeviceUseStatement.indication" />
+        <min value="0" />
+        <max value="*" />
+      </base>
+      <type>
+        <code value="CodeableConcept" />
+      </type>
+      <isSummary value="true" />
+      <mapping>
+        <identity value="quick" />
+        <map value="Action.indication.reason" />
+      </mapping>
+      <mapping>
+        <identity value="w5" />
+        <map value="why" />
+      </mapping>
+    </element>
+    <element>
+      <path value="DeviceUseStatement.notes" />
+      <definition value="Details about the device statement that were not represented at all or sufficiently in one of the attributes provided in a class. These may include for example a comment, an instruction, or a note associated with the statement." />
+      <min value="0" />
+      <max value="0" />
+      <base>
+        <path value="DeviceUseStatement.notes" />
+        <min value="0" />
+        <max value="*" />
+      </base>
+      <type>
+        <code value="string" />
+      </type>
+      <isSummary value="true" />
+      <mapping>
+        <identity value="quick" />
+        <map value="ClinicalStatement.additionalText" />
+      </mapping>
+    </element>
+    <element>
+      <path value="DeviceUseStatement.recordedOn" />
+      <definition value="The time at which the statement was made/recorded." />
+      <min value="0" />
+      <max value="0" />
+      <base>
+        <path value="DeviceUseStatement.recordedOn" />
+        <min value="0" />
+        <max value="1" />
+      </base>
+      <type>
+        <code value="dateTime" />
+      </type>
+      <isSummary value="true" />
+      <mapping>
+        <identity value="quick" />
+        <map value="ClinicalStatement.statementDateTime" />
+      </mapping>
+      <mapping>
+        <identity value="w5" />
+        <map value="when.recorded" />
+      </mapping>
+    </element>
+    <element>
+      <path value="DeviceUseStatement.timing[x]" />
+      <definition value="How often the device was used." />
+      <min value="0" />
+      <max value="0" />
+      <base>
+        <path value="DeviceUseStatement.timing[x]" />
+        <min value="0" />
+        <max value="1" />
+      </base>
+      <type>
+        <code value="Timing" />
+      </type>
+      <type>
+        <code value="Period" />
+      </type>
+      <type>
+        <code value="dateTime" />
+      </type>
+      <isSummary value="true" />
+      <mapping>
+        <identity value="quick" />
+        <map value="DeviceUse.applicationSchedule" />
+      </mapping>
+      <mapping>
+        <identity value="w5" />
+        <map value="when.done" />
+      </mapping>
+    </element>
+  </differential>
+</StructureDefinition>

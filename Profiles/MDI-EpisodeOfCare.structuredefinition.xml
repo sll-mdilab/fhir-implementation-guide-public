@@ -1,0 +1,281 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<StructureDefinition xmlns="http://hl7.org/fhir">
+  <id value="mdi-episode-of-care" />
+  <meta>
+    <lastUpdated value="2016-03-30T16:21:20.467+02:00" />
+  </meta>
+  <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm">
+    <valueInteger value="0" />
+  </extension>
+  <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm-no-warnings">
+    <valueInteger value="1" />
+  </extension>
+  <url value="http://sll-mdilab.net/fhir/StructureDefinition/mdi-episode-of-care" />
+  <name value="MDI EpisodeOfCare Profile" />
+  <display value="MDI-EpisodeOfCare" />
+  <status value="draft" />
+  <publisher value="SLL Medical Device Integration Lab" />
+  <date value="2016-03-30T00:00:00+02:00" />
+  <fhirVersion value="1.0.1" />
+  <mapping>
+    <identity value="w5" />
+    <uri value="http://hl7.org/fhir/w5" />
+    <name value="W5 Mapping" />
+  </mapping>
+  <mapping>
+    <identity value="rim" />
+    <uri value="http://hl7.org/v3" />
+    <name value="RIM" />
+  </mapping>
+  <kind value="resource" />
+  <constrainedType value="EpisodeOfCare" />
+  <abstract value="false" />
+  <base value="http://hl7.org/fhir/StructureDefinition/EpisodeOfCare" />
+  <differential>
+    <element>
+      <path value="EpisodeOfCare" />
+      <short value="An association of a Patient with an Organization and  Healthcare Provider(s) for a period of time that the Organization assumes some level of responsibility" />
+      <definition value="An association between a patient and an organization / healthcare provider(s) during which time encounters may occur. The managing organization assumes a level of responsibility for the patient during this time." />
+      <alias value="Case Program Problem" />
+      <min value="0" />
+      <max value="*" />
+      <base>
+        <path value="EpisodeOfCare" />
+        <min value="0" />
+        <max value="*" />
+      </base>
+      <type>
+        <code value="EpisodeOfCare" />
+      </type>
+      <mapping>
+        <identity value="w5" />
+        <map value="workflow.encounter" />
+      </mapping>
+    </element>
+    <element>
+      <path value="EpisodeOfCare.identifier" />
+      <short value="Identifier(s) for the EpisodeOfCare" />
+      <definition value="Identifier(s) by which this EpisodeOfCare is known." />
+      <min value="0" />
+      <max value="0" />
+      <base>
+        <path value="EpisodeOfCare.identifier" />
+        <min value="0" />
+        <max value="*" />
+      </base>
+      <type>
+        <code value="Identifier" />
+      </type>
+      <mapping>
+        <identity value="w5" />
+        <map value="id" />
+      </mapping>
+    </element>
+    <element>
+      <path value="EpisodeOfCare.statusHistory" />
+      <short value="Past list of status codes" />
+      <definition value="The history of statuses that the EpisodeOfCare has been through (without requiring processing the history of the resource)." />
+      <min value="0" />
+      <max value="0" />
+      <base>
+        <path value="EpisodeOfCare.statusHistory" />
+        <min value="0" />
+        <max value="*" />
+      </base>
+      <type>
+        <code value="BackboneElement" />
+      </type>
+    </element>
+    <element>
+      <path value="EpisodeOfCare.type" />
+      <short value="Type/class  - e.g. specialist referral, disease management" />
+      <definition value="A classification of the type of encounter; e.g. specialist referral, disease management, type of funded care." />
+      <comments value="The type can be very important in processing as this could be used in determining if the EpisodeOfCare is relevant to specific government reporting, or other types of classifications." />
+      <min value="0" />
+      <max value="0" />
+      <base>
+        <path value="EpisodeOfCare.type" />
+        <min value="0" />
+        <max value="*" />
+      </base>
+      <type>
+        <code value="CodeableConcept" />
+      </type>
+      <isSummary value="true" />
+      <binding>
+        <strength value="example" />
+        <description value="The type of the encounter." />
+      </binding>
+      <mapping>
+        <identity value="w5" />
+        <map value="class" />
+      </mapping>
+    </element>
+    <element>
+      <path value="EpisodeOfCare.condition" />
+      <short value="Conditions/problems/diagnoses this episode of care is for" />
+      <definition value="A list of conditions/problems/diagnoses that this episode of care is intended to be providing care for." />
+      <min value="0" />
+      <max value="0" />
+      <base>
+        <path value="EpisodeOfCare.condition" />
+        <min value="0" />
+        <max value="*" />
+      </base>
+      <type>
+        <code value="Reference" />
+        <profile value="http://hl7.org/fhir/StructureDefinition/Condition" />
+      </type>
+      <mapping>
+        <identity value="w5" />
+        <map value="what" />
+      </mapping>
+    </element>
+    <element>
+      <path value="EpisodeOfCare.managingOrganization" />
+      <short value="Organization that assumes care" />
+      <definition value="The organization that has assumed the specific responsibilities for the specified duration." />
+      <min value="1" />
+      <max value="1" />
+      <base>
+        <path value="EpisodeOfCare.managingOrganization" />
+        <min value="0" />
+        <max value="1" />
+      </base>
+      <type>
+        <code value="Reference" />
+        <profile value="http://hl7.org/fhir/StructureDefinition/Organization" />
+      </type>
+      <isSummary value="true" />
+    </element>
+    <element>
+      <path value="EpisodeOfCare.period" />
+      <short value="Interval during responsibility is assumed" />
+      <definition value="The interval during which the managing organization assumes the defined responsibility." />
+      <min value="0" />
+      <max value="0" />
+      <base>
+        <path value="EpisodeOfCare.period" />
+        <min value="0" />
+        <max value="1" />
+      </base>
+      <type>
+        <code value="Period" />
+      </type>
+      <isSummary value="true" />
+      <mapping>
+        <identity value="w5" />
+        <map value="when.init" />
+      </mapping>
+    </element>
+    <element>
+      <path value="EpisodeOfCare.referralRequest" />
+      <short value="Originating Referral Request(s)" />
+      <definition value="Referral Request(s) that are fulfilled by this EpisodeOfCare, incoming referrals." />
+      <min value="0" />
+      <max value="0" />
+      <base>
+        <path value="EpisodeOfCare.referralRequest" />
+        <min value="0" />
+        <max value="*" />
+      </base>
+      <type>
+        <code value="Reference" />
+        <profile value="http://hl7.org/fhir/StructureDefinition/ReferralRequest" />
+      </type>
+    </element>
+    <element>
+      <path value="EpisodeOfCare.careManager" />
+      <short value="Care manager/care co-ordinator for the patient" />
+      <definition value="The practitioner that is the care manager/care co-ordinator for this patient." />
+      <min value="1" />
+      <max value="1" />
+      <base>
+        <path value="EpisodeOfCare.careManager" />
+        <min value="0" />
+        <max value="1" />
+      </base>
+      <type>
+        <code value="Reference" />
+        <profile value="http://hl7.org/fhir/StructureDefinition/Practitioner" />
+      </type>
+    </element>
+    <element>
+      <path value="EpisodeOfCare.careTeam" />
+      <short value="Other practitioners facilitating this episode of care" />
+      <definition value="The list of practitioners that may be facilitating this episode of care for specific purposes." />
+      <min value="1" />
+      <max value="1" />
+      <base>
+        <path value="EpisodeOfCare.careTeam" />
+        <min value="0" />
+        <max value="*" />
+      </base>
+      <type>
+        <code value="BackboneElement" />
+      </type>
+    </element>
+    <element>
+      <path value="EpisodeOfCare.careTeam.role" />
+      <short value="Role taken by this team member" />
+      <definition value="The role this team member is taking within this episode of care." />
+      <min value="0" />
+      <max value="0" />
+      <base>
+        <path value="EpisodeOfCare.careTeam.role" />
+        <min value="0" />
+        <max value="*" />
+      </base>
+      <type>
+        <code value="CodeableConcept" />
+      </type>
+      <binding>
+        <strength value="example" />
+        <description value="Type of participation expected by a team member." />
+        <valueSetReference>
+          <reference value="http://hl7.org/fhir/ValueSet/participant-role" />
+        </valueSetReference>
+      </binding>
+    </element>
+    <element>
+      <path value="EpisodeOfCare.careTeam.period" />
+      <short value="Period of time for this role" />
+      <definition value="The period of time this practitioner is performing some role within the episode of care." />
+      <min value="0" />
+      <max value="0" />
+      <base>
+        <path value="EpisodeOfCare.careTeam.period" />
+        <min value="0" />
+        <max value="1" />
+      </base>
+      <type>
+        <code value="Period" />
+      </type>
+    </element>
+    <element>
+      <path value="EpisodeOfCare.careTeam.member" />
+      <short value="The practitioner (or Organization) within the team" />
+      <definition value="The practitioner (or Organization) within the team." />
+      <comments value="Where an Organization is included in the CareTeam, it is really providing some form of services to the EpisodeOfCare (e.g. Jim's Mowing Services) the details of the services would be included on a CarePlan." />
+      <min value="1" />
+      <max value="1" />
+      <base>
+        <path value="EpisodeOfCare.careTeam.member" />
+        <min value="0" />
+        <max value="1" />
+      </base>
+      <type>
+        <code value="Reference" />
+        <profile value="http://hl7.org/fhir/StructureDefinition/Practitioner" />
+      </type>
+      <type>
+        <code value="Reference" />
+        <profile value="http://hl7.org/fhir/StructureDefinition/Organization" />
+      </type>
+      <mapping>
+        <identity value="w5" />
+        <map value="who" />
+      </mapping>
+    </element>
+  </differential>
+</StructureDefinition>

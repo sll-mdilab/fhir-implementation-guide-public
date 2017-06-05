@@ -1,0 +1,728 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<StructureDefinition xmlns="http://hl7.org/fhir">
+  <meta>
+    <lastUpdated value="2016-03-30T16:21:27.319+02:00" />
+  </meta>
+  <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm">
+    <valueInteger value="0" />
+  </extension>
+  <url value="http://sll-mdilab.net/fhir/StructureDefinition/mdi-appointment" />
+  <name value="MDI Appointment Profile" />
+  <status value="draft" />
+  <publisher value="SLL Medical Device Integration Lab" />
+  <date value="2016-03-30T00:00:00+02:00" />
+  <description value="Base StructureDefinition for Appointment Resource" />
+  <fhirVersion value="1.0.1" />
+  <mapping>
+    <identity value="rim" />
+    <uri value="http://hl7.org/v3" />
+    <name value="RIM" />
+  </mapping>
+  <mapping>
+    <identity value="ical" />
+    <uri value="http://www.ietf.org/rfc/rfc2445.txt" />
+    <name value="iCalendar" />
+  </mapping>
+  <mapping>
+    <identity value="w5" />
+    <uri value="http://hl7.org/fhir/w5" />
+    <name value="W5 Mapping" />
+  </mapping>
+  <mapping>
+    <identity value="v2" />
+    <uri value="http://hl7.org/v2" />
+    <name value="HL7 v2" />
+  </mapping>
+  <kind value="resource" />
+  <constrainedType value="Appointment" />
+  <abstract value="false" />
+  <base value="http://hl7.org/fhir/StructureDefinition/Appointment" />
+  <differential>
+    <element>
+      <path value="Appointment" />
+      <short value="A booking of a healthcare event among patient(s), practitioner(s), related person(s) and/or device(s) for a specific date/time. This may result in one or more Encounter(s)" />
+      <definition value="A booking of a healthcare event among patient(s), practitioner(s), related person(s) and/or device(s) for a specific date/time. This may result in one or more Encounter(s)." />
+      <min value="0" />
+      <max value="*" />
+      <base>
+        <path value="Appointment" />
+        <min value="0" />
+        <max value="*" />
+      </base>
+      <type>
+        <code value="Appointment" />
+      </type>
+      <mapping>
+        <identity value="rim" />
+        <map value="Act (ActMood = ActMoodAppointment or ActMoodAppointmentRequest)" />
+      </mapping>
+      <mapping>
+        <identity value="ical" />
+        <map value="VEVENT" />
+      </mapping>
+      <mapping>
+        <identity value="w5" />
+        <map value="workflow.scheduling" />
+      </mapping>
+    </element>
+    <element>
+      <path value="Appointment.identifier" />
+      <short value="External Ids for this item" />
+      <definition value="This records identifiers associated with this appointment concern that are defined by business processes and/or used to refer to it when a direct URL reference to the resource itself is not appropriate (e.g. in CDA documents, or in written / printed documentation)." />
+      <min value="0" />
+      <max value="0" />
+      <base>
+        <path value="Appointment.identifier" />
+        <min value="0" />
+        <max value="*" />
+      </base>
+      <type>
+        <code value="Identifier" />
+      </type>
+      <isSummary value="true" />
+      <mapping>
+        <identity value="v2" />
+        <map value="SCH-1, SCH-2, ARQ-1, ARQ-2" />
+      </mapping>
+      <mapping>
+        <identity value="rim" />
+        <map value=".id" />
+      </mapping>
+      <mapping>
+        <identity value="ical" />
+        <map value="UID" />
+      </mapping>
+      <mapping>
+        <identity value="w5" />
+        <map value="id" />
+      </mapping>
+    </element>
+    <element>
+      <path value="Appointment.type" />
+      <short value="The type of appointment that is being booked" />
+      <definition value="The type of appointment that is being booked (This may also be associated with participants for location, and/or a HealthcareService)." />
+      <min value="0" />
+      <max value="0" />
+      <base>
+        <path value="Appointment.type" />
+        <min value="0" />
+        <max value="1" />
+      </base>
+      <type>
+        <code value="CodeableConcept" />
+      </type>
+      <isSummary value="true" />
+      <binding>
+        <strength value="preferred" />
+        <description value="Additional details about where the content was created (e.g. clinical specialty)." />
+        <valueSetReference>
+          <reference value="http://hl7.org/fhir/ValueSet/c80-practice-codes" />
+        </valueSetReference>
+      </binding>
+      <mapping>
+        <identity value="rim" />
+        <map value=".code" />
+      </mapping>
+      <mapping>
+        <identity value="w5" />
+        <map value="class" />
+      </mapping>
+    </element>
+    <element>
+      <path value="Appointment.reason" />
+      <short value="Reason this appointment is scheduled" />
+      <definition value="The reason that this appointment is being scheduled. This is more clinical than administrative." />
+      <min value="0" />
+      <max value="0" />
+      <base>
+        <path value="Appointment.reason" />
+        <min value="0" />
+        <max value="1" />
+      </base>
+      <type>
+        <code value="CodeableConcept" />
+      </type>
+      <isSummary value="true" />
+      <binding>
+        <strength value="required" />
+        <description value="The Reason for the appointment to take place." />
+        <valueSetReference>
+          <reference value="http://hl7.org/fhir/ValueSet/encounter-reason" />
+        </valueSetReference>
+      </binding>
+      <mapping>
+        <identity value="v2" />
+        <map value="AIS-3, ARQ-7, SCH-7" />
+      </mapping>
+      <mapping>
+        <identity value="rim" />
+        <map value="(encounter appointment).reason" />
+      </mapping>
+    </element>
+    <element>
+      <path value="Appointment.priority" />
+      <short value="Used to make informed decisions if needing to re-prioritize" />
+      <definition value="The priority of the appointment. Can be used to make informed decisions if needing to re-prioritize appointments. (The iCal Standard specifies 0 as undefined, 1 as highest, 9 as lowest priority)." />
+      <comments value="Seeking implementer feedback on this property and how interoperable it is.  Using an extension to record a codeableconcept for named values may be tested at a future connectathon." />
+      <min value="0" />
+      <max value="0" />
+      <base>
+        <path value="Appointment.priority" />
+        <min value="0" />
+        <max value="1" />
+      </base>
+      <type>
+        <code value="unsignedInt" />
+      </type>
+      <mapping>
+        <identity value="v2" />
+        <map value="ARQ-12, SCH-11.6 / TQ1-9" />
+      </mapping>
+      <mapping>
+        <identity value="rim" />
+        <map value=".priorityCode" />
+      </mapping>
+      <mapping>
+        <identity value="ical" />
+        <map value="PRIORITY" />
+      </mapping>
+      <mapping>
+        <identity value="w5" />
+        <map value="class" />
+      </mapping>
+    </element>
+    <element>
+      <path value="Appointment.description" />
+      <short value="Shown on a subject line in a meeting request, or appointment list" />
+      <definition value="The brief description of the appointment as would be shown on a subject line in a meeting request, or appointment list. Detailed or expanded information should be put in the comment field." />
+      <min value="1" />
+      <max value="1" />
+      <base>
+        <path value="Appointment.description" />
+        <min value="0" />
+        <max value="1" />
+      </base>
+      <type>
+        <code value="string" />
+      </type>
+      <mapping>
+        <identity value="v2" />
+        <map value="NTE-3" />
+      </mapping>
+      <mapping>
+        <identity value="rim" />
+        <map value=".text" />
+      </mapping>
+      <mapping>
+        <identity value="ical" />
+        <map value="DESCRIPTION" />
+      </mapping>
+    </element>
+    <element>
+      <path value="Appointment.start" />
+      <short value="When appointment is to take place" />
+      <definition value="Date/Time that the appointment is to take place." />
+      <min value="1" />
+      <max value="1" />
+      <base>
+        <path value="Appointment.start" />
+        <min value="0" />
+        <max value="1" />
+      </base>
+      <type>
+        <code value="instant" />
+      </type>
+      <isSummary value="true" />
+      <mapping>
+        <identity value="v2" />
+        <map value="ARQ-11.1, SCH-11.4 / TQ1-7" />
+      </mapping>
+      <mapping>
+        <identity value="rim" />
+        <map value=".effectiveTime.low" />
+      </mapping>
+      <mapping>
+        <identity value="w5" />
+        <map value="when.init" />
+      </mapping>
+    </element>
+    <element>
+      <path value="Appointment.end" />
+      <short value="When appointment is to conclude" />
+      <definition value="Date/Time that the appointment is to conclude." />
+      <min value="1" />
+      <max value="1" />
+      <base>
+        <path value="Appointment.end" />
+        <min value="0" />
+        <max value="1" />
+      </base>
+      <type>
+        <code value="instant" />
+      </type>
+      <isSummary value="true" />
+      <mapping>
+        <identity value="v2" />
+        <map value="ARQ-11.2, SCH-11.5 / TQ1-8" />
+      </mapping>
+      <mapping>
+        <identity value="rim" />
+        <map value=".effectiveTime.high" />
+      </mapping>
+      <mapping>
+        <identity value="w5" />
+        <map value="when.done" />
+      </mapping>
+    </element>
+    <element>
+      <path value="Appointment.minutesDuration" />
+      <short value="Can be less than start/end (e.g. estimate)" />
+      <definition value="Number of minutes that the appointment is to take. This can be less than the duration between the start and end times (where actual time of appointment is only an estimate or is a planned appointment request)." />
+      <min value="0" />
+      <max value="0" />
+      <base>
+        <path value="Appointment.minutesDuration" />
+        <min value="0" />
+        <max value="1" />
+      </base>
+      <type>
+        <code value="positiveInt" />
+      </type>
+    </element>
+    <element>
+      <path value="Appointment.slot" />
+      <short value="If provided, then no schedule and start/end values MUST match slot" />
+      <definition value="The slot that this appointment is filling. If provided then the schedule will not be provided as slots are not recursive, and the start/end values MUST be the same as from the slot." />
+      <min value="0" />
+      <max value="0" />
+      <base>
+        <path value="Appointment.slot" />
+        <min value="0" />
+        <max value="*" />
+      </base>
+      <type>
+        <code value="Reference" />
+        <profile value="http://hl7.org/fhir/StructureDefinition/Slot" />
+      </type>
+      <mapping>
+        <identity value="rim" />
+        <map value="Schedule-Slot (classCode=ACT, moodCode = SLOT)" />
+      </mapping>
+    </element>
+    <element>
+      <path value="Appointment.participant" />
+      <slicing>
+        <discriminator value="@type" />
+        <rules value="openAtEnd" />
+      </slicing>
+      <short value="Participants involved in appointment" />
+      <definition value="List of participants involved in the appointment." />
+      <min value="2" />
+      <max value="2" />
+      <base>
+        <path value="Appointment.participant" />
+        <min value="1" />
+        <max value="*" />
+      </base>
+    </element>
+    <element>
+      <path value="Appointment.participant.actor" />
+      <short value="Person, Location/HealthcareService or Device" />
+      <definition value="A Person, Location/HealthcareService or Device that is participating in the appointment." />
+      <min value="1" />
+      <max value="1" />
+      <base>
+        <path value="Appointment.participant.actor" />
+        <min value="0" />
+        <max value="1" />
+      </base>
+      <type>
+        <code value="Reference" />
+        <profile value="http://hl7.org/fhir/StructureDefinition/Patient" />
+      </type>
+      <type>
+        <code value="Reference" />
+        <profile value="http://hl7.org/fhir/StructureDefinition/Practitioner" />
+      </type>
+      <isSummary value="true" />
+      <mapping>
+        <identity value="v2" />
+        <map value="PID-3-Patient ID List | AIL-3 | AIG-3 | AIP-3" />
+      </mapping>
+      <mapping>
+        <identity value="rim" />
+        <map value="performer | reusableDevice | subject | location" />
+      </mapping>
+      <mapping>
+        <identity value="ical" />
+        <map value="ATTENDEE: (Need to provide the common name CN and also the MAILTO properties from the practitioner resource) where the participant type is not &quot;information-only&quot;" />
+      </mapping>
+      <mapping>
+        <identity value="w5" />
+        <map value="who" />
+      </mapping>
+    </element>
+    <element>
+      <path value="Appointment.participant" />
+      <name value="PrimaryPerformer" />
+      <short value="Participants involved in appointment" />
+      <definition value="The primary performer of an appointment." />
+      <min value="1" />
+      <max value="1" />
+      <base>
+        <path value="Appointment.participant" />
+        <min value="1" />
+        <max value="*" />
+      </base>
+      <type>
+        <code value="BackboneElement" />
+      </type>
+      <mapping>
+        <identity value="v2" />
+        <map value="PID, AIP, AIG, AIL" />
+      </mapping>
+      <mapping>
+        <identity value="ical" />
+        <map value="ATTENDEE component to be created" />
+      </mapping>
+    </element>
+    <element>
+      <path value="Appointment.participant.type" />
+      <short value="Role of participant in the appointment" />
+      <definition value="Role of participant in the appointment." />
+      <comments value="The role of the participant can be used to declare what the actor will be doing in the scope of this appointment.  If the actor is not specified, then it is expected that the actor will be filled in at a later stage of planning.  This value MUST be the same when creating an AppointmentResponse so that they can be matched, and subsequently update the Appointment." />
+      <min value="1" />
+      <max value="1" />
+      <base>
+        <path value="Appointment.participant.type" />
+        <min value="0" />
+        <max value="*" />
+      </base>
+      <type>
+        <code value="CodeableConcept" />
+      </type>
+      <isSummary value="true" />
+      <binding>
+        <strength value="required" />
+        <description value="Role of participant in encounter." />
+        <valueSetReference>
+          <reference value="http://hl7.org/fhir/ValueSet/encounter-participant-type" />
+        </valueSetReference>
+      </binding>
+      <mapping>
+        <identity value="v2" />
+        <map value="AIP-4, AIG-4" />
+      </mapping>
+      <mapping>
+        <identity value="ical" />
+        <map value="n/a" />
+      </mapping>
+    </element>
+    <element>
+      <path value="Appointment.participant.type.coding.system" />
+      <short value="Identity of the terminology system" />
+      <definition value="The identification of the code system that defines the meaning of the symbol in the code." />
+      <comments value="The URI may be an OID (urn:oid:...) or a UUID (urn:uuid:...).  OIDs and UUIDs SHALL be references to the HL7 OID registry. Otherwise, the URI should come from HL7's list of FHIR defined special URIs or it should de-reference to some definition that establish the system clearly and unambiguously." />
+      <requirements value="Need to be unambiguous about the source of the definition of the symbol." />
+      <min value="0" />
+      <max value="1" />
+      <base>
+        <path value="Coding.system" />
+        <min value="0" />
+        <max value="1" />
+      </base>
+      <type>
+        <code value="uri" />
+      </type>
+      <fixedUri value="http://hl7.org/fhir/ValueSet/v3-ParticipationType" />
+      <isSummary value="true" />
+      <mapping>
+        <identity value="v2" />
+        <map value="C*E.3" />
+      </mapping>
+      <mapping>
+        <identity value="rim" />
+        <map value="./codeSystem" />
+      </mapping>
+      <mapping>
+        <identity value="orim" />
+        <map value="fhir:Coding.system rdfs:subPropertyOf dt:CDCoding.codeSystem" />
+      </mapping>
+    </element>
+    <element>
+      <path value="Appointment.participant.type.coding.code" />
+      <short value="Symbol in syntax defined by the system" />
+      <definition value="A symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination)." />
+      <requirements value="Need to refer to a particular code in the system." />
+      <min value="0" />
+      <max value="1" />
+      <base>
+        <path value="Coding.code" />
+        <min value="0" />
+        <max value="1" />
+      </base>
+      <type>
+        <code value="code" />
+      </type>
+      <fixedCode value="PPRF" />
+      <isSummary value="true" />
+      <mapping>
+        <identity value="v2" />
+        <map value="C*E.1" />
+      </mapping>
+      <mapping>
+        <identity value="rim" />
+        <map value="./code" />
+      </mapping>
+      <mapping>
+        <identity value="orim" />
+        <map value="fhir:Coding.code rdfs:subPropertyOf dt:CDCoding.code" />
+      </mapping>
+    </element>
+    <element>
+      <path value="Appointment.participant.actor" />
+      <short value="Person, Location/HealthcareService or Device" />
+      <definition value="A Person, Location/HealthcareService or Device that is participating in the appointment." />
+      <min value="0" />
+      <max value="1" />
+      <base>
+        <path value="Appointment.participant.actor" />
+        <min value="0" />
+        <max value="1" />
+      </base>
+      <type>
+        <code value="Reference" />
+        <profile value="http://hl7.org/fhir/StructureDefinition/Practitioner" />
+      </type>
+      <isSummary value="true" />
+      <mapping>
+        <identity value="v2" />
+        <map value="PID-3-Patient ID List | AIL-3 | AIG-3 | AIP-3" />
+      </mapping>
+      <mapping>
+        <identity value="rim" />
+        <map value="performer | reusableDevice | subject | location" />
+      </mapping>
+      <mapping>
+        <identity value="ical" />
+        <map value="ATTENDEE: (Need to provide the common name CN and also the MAILTO properties from the practitioner resource) where the participant type is not &quot;information-only&quot;" />
+      </mapping>
+      <mapping>
+        <identity value="w5" />
+        <map value="who" />
+      </mapping>
+    </element>
+    <element>
+      <path value="Appointment.participant.required" />
+      <short value="required | optional | information-only" />
+      <definition value="Is this participant required to be present at the meeting. This covers a use-case where 2 doctors need to meet to discuss the results for a specific patient, and the patient is not required to be present." />
+      <min value="0" />
+      <max value="0" />
+      <base>
+        <path value="Appointment.participant.required" />
+        <min value="0" />
+        <max value="1" />
+      </base>
+      <type>
+        <code value="code" />
+      </type>
+      <isSummary value="true" />
+      <binding>
+        <strength value="required" />
+        <description value="Is the Participant required to attend the appointment." />
+        <valueSetReference>
+          <reference value="http://hl7.org/fhir/ValueSet/participantrequired" />
+        </valueSetReference>
+      </binding>
+      <mapping>
+        <identity value="rim" />
+        <map value="performer.performIndicator" />
+      </mapping>
+      <mapping>
+        <identity value="ical" />
+        <map value="ROLE=REQ-PARTICIPANT (roleparam)" />
+      </mapping>
+    </element>
+    <element>
+      <path value="Appointment.participant" />
+      <name value="Subject" />
+      <short value="Participants involved in appointment" />
+      <definition value="The subject (patient) of an appointment." />
+      <min value="1" />
+      <max value="1" />
+      <base>
+        <path value="Appointment.participant" />
+        <min value="1" />
+        <max value="*" />
+      </base>
+      <type>
+        <code value="BackboneElement" />
+      </type>
+      <mapping>
+        <identity value="v2" />
+        <map value="PID, AIP, AIG, AIL" />
+      </mapping>
+      <mapping>
+        <identity value="ical" />
+        <map value="ATTENDEE component to be created" />
+      </mapping>
+    </element>
+    <element>
+      <path value="Appointment.participant.type" />
+      <short value="Role of participant in the appointment" />
+      <definition value="Role of participant in the appointment." />
+      <comments value="The role of the participant can be used to declare what the actor will be doing in the scope of this appointment.  If the actor is not specified, then it is expected that the actor will be filled in at a later stage of planning.  This value MUST be the same when creating an AppointmentResponse so that they can be matched, and subsequently update the Appointment." />
+      <min value="1" />
+      <max value="1" />
+      <base>
+        <path value="Appointment.participant.type" />
+        <min value="0" />
+        <max value="*" />
+      </base>
+      <type>
+        <code value="CodeableConcept" />
+      </type>
+      <isSummary value="true" />
+      <binding>
+        <strength value="required" />
+        <description value="Role of participant in encounter." />
+        <valueSetReference>
+          <reference value="http://hl7.org/fhir/ValueSet/encounter-participant-type" />
+        </valueSetReference>
+      </binding>
+      <mapping>
+        <identity value="v2" />
+        <map value="AIP-4, AIG-4" />
+      </mapping>
+      <mapping>
+        <identity value="ical" />
+        <map value="n/a" />
+      </mapping>
+    </element>
+    <element>
+      <path value="Appointment.participant.type.coding.system" />
+      <short value="Identity of the terminology system" />
+      <definition value="The identification of the code system that defines the meaning of the symbol in the code." />
+      <comments value="The URI may be an OID (urn:oid:...) or a UUID (urn:uuid:...).  OIDs and UUIDs SHALL be references to the HL7 OID registry. Otherwise, the URI should come from HL7's list of FHIR defined special URIs or it should de-reference to some definition that establish the system clearly and unambiguously." />
+      <requirements value="Need to be unambiguous about the source of the definition of the symbol." />
+      <min value="0" />
+      <max value="1" />
+      <base>
+        <path value="Coding.system" />
+        <min value="0" />
+        <max value="1" />
+      </base>
+      <type>
+        <code value="uri" />
+      </type>
+      <fixedUri value="http://hl7.org/fhir/ValueSet/v3-ParticipationType" />
+      <isSummary value="true" />
+      <mapping>
+        <identity value="v2" />
+        <map value="C*E.3" />
+      </mapping>
+      <mapping>
+        <identity value="rim" />
+        <map value="./codeSystem" />
+      </mapping>
+      <mapping>
+        <identity value="orim" />
+        <map value="fhir:Coding.system rdfs:subPropertyOf dt:CDCoding.codeSystem" />
+      </mapping>
+    </element>
+    <element>
+      <path value="Appointment.participant.type.coding.code" />
+      <short value="Symbol in syntax defined by the system" />
+      <definition value="A symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination)." />
+      <requirements value="Need to refer to a particular code in the system." />
+      <min value="0" />
+      <max value="1" />
+      <base>
+        <path value="Coding.code" />
+        <min value="0" />
+        <max value="1" />
+      </base>
+      <type>
+        <code value="code" />
+      </type>
+      <fixedCode value="SBJ" />
+      <isSummary value="true" />
+      <mapping>
+        <identity value="v2" />
+        <map value="C*E.1" />
+      </mapping>
+      <mapping>
+        <identity value="rim" />
+        <map value="./code" />
+      </mapping>
+      <mapping>
+        <identity value="orim" />
+        <map value="fhir:Coding.code rdfs:subPropertyOf dt:CDCoding.code" />
+      </mapping>
+    </element>
+    <element>
+      <path value="Appointment.participant.actor" />
+      <short value="Person, Location/HealthcareService or Device" />
+      <definition value="A Person, Location/HealthcareService or Device that is participating in the appointment." />
+      <min value="0" />
+      <max value="1" />
+      <base>
+        <path value="Appointment.participant.actor" />
+        <min value="0" />
+        <max value="1" />
+      </base>
+      <type>
+        <code value="Reference" />
+        <profile value="http://hl7.org/fhir/StructureDefinition/Patient" />
+      </type>
+      <isSummary value="true" />
+      <mapping>
+        <identity value="v2" />
+        <map value="PID-3-Patient ID List | AIL-3 | AIG-3 | AIP-3" />
+      </mapping>
+      <mapping>
+        <identity value="rim" />
+        <map value="performer | reusableDevice | subject | location" />
+      </mapping>
+      <mapping>
+        <identity value="ical" />
+        <map value="ATTENDEE: (Need to provide the common name CN and also the MAILTO properties from the practitioner resource) where the participant type is not &quot;information-only&quot;" />
+      </mapping>
+      <mapping>
+        <identity value="w5" />
+        <map value="who" />
+      </mapping>
+    </element>
+    <element>
+      <path value="Appointment.participant.required" />
+      <short value="required | optional | information-only" />
+      <definition value="Is this participant required to be present at the meeting. This covers a use-case where 2 doctors need to meet to discuss the results for a specific patient, and the patient is not required to be present." />
+      <min value="0" />
+      <max value="0" />
+      <base>
+        <path value="Appointment.participant.required" />
+        <min value="0" />
+        <max value="1" />
+      </base>
+      <type>
+        <code value="code" />
+      </type>
+      <isSummary value="true" />
+      <binding>
+        <strength value="required" />
+        <description value="Is the Participant required to attend the appointment." />
+        <valueSetReference>
+          <reference value="http://hl7.org/fhir/ValueSet/participantrequired" />
+        </valueSetReference>
+      </binding>
+      <mapping>
+        <identity value="rim" />
+        <map value="performer.performIndicator" />
+      </mapping>
+      <mapping>
+        <identity value="ical" />
+        <map value="ROLE=REQ-PARTICIPANT (roleparam)" />
+      </mapping>
+    </element>
+  </differential>
+</StructureDefinition>

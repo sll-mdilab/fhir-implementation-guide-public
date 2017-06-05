@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<StructureDefinition xmlns="http://hl7.org/fhir">
+  <meta>
+    <lastUpdated value="2016-03-30T16:21:23.532+02:00" />
+  </meta>
+  <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm">
+    <valueInteger value="0" />
+  </extension>
+  <url value="http://sll-mdilab.net/fhir/StructureDefinition/mdi-clinical-impression" />
+  <name value="MDI ClinicalImpression Profile" />
+  <status value="draft" />
+  <publisher value="SLL Medical Device Integration Lab" />
+  <date value="2016-03-30T00:00:00+02:00" />
+  <description value="Base StructureDefinition for ClinicalImpression Resource" />
+  <fhirVersion value="1.0.1" />
+  <mapping>
+    <identity value="v2" />
+    <uri value="http://hl7.org/v2" />
+    <name value="HL7 v2" />
+  </mapping>
+  <mapping>
+    <identity value="w5" />
+    <uri value="http://hl7.org/fhir/w5" />
+    <name value="W5 Mapping" />
+  </mapping>
+  <mapping>
+    <identity value="rim" />
+    <uri value="http://hl7.org/v3" />
+    <name value="RIM" />
+  </mapping>
+  <kind value="resource" />
+  <constrainedType value="ClinicalImpression" />
+  <abstract value="false" />
+  <base value="http://hl7.org/fhir/StructureDefinition/ClinicalImpression" />
+  <differential>
+    <element>
+      <path value="ClinicalImpression" />
+      <short value="A clinical assessment performed when planning treatments and management strategies for a patient" />
+      <definition value="A record of a clinical assessment performed to determine what problem(s) may affect the patient and before planning the treatments or management strategies that are best to manage a patient's condition. Assessments are often 1:1 with a clinical consultation / encounter,  but this varies greatly depending on the clinical workflow. This resource is called &quot;ClinicalImpression&quot; rather than &quot;ClinicalAssessment&quot; to avoid confusion with the recording of assessment tools such as Apgar score." />
+      <min value="0" />
+      <max value="*" />
+      <base>
+        <path value="ClinicalImpression" />
+        <min value="0" />
+        <max value="*" />
+      </base>
+      <type>
+        <code value="ClinicalImpression" />
+      </type>
+      <mapping>
+        <identity value="v2" />
+        <map value="Partial mapping for problem evaluation" />
+      </mapping>
+      <mapping>
+        <identity value="w5" />
+        <map value="clinical.general" />
+      </mapping>
+    </element>
+  </differential>
+</StructureDefinition>

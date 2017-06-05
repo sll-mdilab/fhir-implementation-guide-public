@@ -1,0 +1,225 @@
+<ImplementationGuide xmlns="http://hl7.org/fhir">
+<id value="implementation-guide"/>
+<language value="English"/>
+<url value="http://sll-mdilab.net/fhir/ImplementationGuide/mdi-implementation-guide"/>
+<name value="SLL MDI Lab Implementation Guide"/>
+<status value="draft"/>
+<publisher value="SLL Medical Device Integration Lab"/>
+<date value="2016-03-30T15:57:25+02:00"/>
+<description value="This implementation guide descibes the FHIR profiles used by the proof-of-concept system developed at the Medical Device Integration Lab of Stockholm County Council."/>
+<fhirVersion value="1.0.1"/>
+ <package>
+<name value="Profiles"/>
+ <resource>
+<purpose value="profile"/>
+<name value="MDI Appointment Profile"/>
+<description value="Base StructureDefinition for Appointment Resource"/>
+ <sourceReference>
+<reference value="http://sll-mdilab.net/fhir/StructureDefinition/mdi-appointment"/>
+</sourceReference>
+</resource>
+ <resource>
+<purpose value="profile"/>
+<name value="MDI AutomaticVitalSignObservation Profile"/>
+<description value="An automatically (by a device) performed observation."/>
+ <sourceReference>
+<reference value="http://sll-mdilab.net/fhir/StructureDefinition/mdi-automatic-vital-sign-observation"/>
+</sourceReference>
+</resource>
+ <resource>
+<purpose value="profile"/>
+<name value="MDI Condition Profile"/>
+ <sourceReference>
+<reference value="http://sll-mdilab.net/fhir/StructureDefinition/mdi-condition"/>
+</sourceReference>
+</resource>
+ <resource>
+<purpose value="profile"/>
+<name value="MDI Encounter Profile"/>
+ <sourceReference>
+<reference value="http://sll-mdilab.net/fhir/StructureDefinition/mdi-encounter"/>
+</sourceReference>
+</resource>
+ <resource>
+<purpose value="profile"/>
+<name value="MDI EpisodeOfCare Profile"/>
+ <sourceReference>
+<reference value="http://sll-mdilab.net/fhir/StructureDefinition/mdi-episode-of-care"/>
+</sourceReference>
+</resource>
+ <resource>
+<purpose value="profile"/>
+<name value="MDI ManualVitalSignObservation Profile"/>
+<description value="A manually made observation."/>
+ <sourceReference>
+<reference value="http://sll-mdilab.net/fhir/StructureDefinition/mdi-manual-vital-sign-observation"/>
+</sourceReference>
+</resource>
+ <resource>
+<purpose value="profile"/>
+<name value="MDI MetricOrder Profile"/>
+ <sourceReference>
+<reference value="http://sll-mdilab.net/fhir/StructureDefinition/mdi-metric-order"/>
+</sourceReference>
+</resource>
+ <resource>
+<purpose value="profile"/>
+<name value="MDI OrderableDeviceMetric Profile"/>
+<description value="A device metric which can be used to order monitoring for a patient."/>
+ <sourceReference>
+<reference value="http://sll-mdilab.net/fhir/StructureDefinition/mdi-orderable-device-metric"/>
+</sourceReference>
+</resource>
+ <resource>
+<purpose value="profile"/>
+<name value="MDI Organization Profile"/>
+ <sourceReference>
+<reference value="http://sll-mdilab.net/fhir/StructureDefinition/mdi-organization"/>
+</sourceReference>
+</resource>
+ <resource>
+<purpose value="profile"/>
+<name value="MDI PatientDeviceAssociation Profile"/>
+<description value="Base StructureDefinition for DeviceUseStatement Resource"/>
+ <sourceReference>
+<reference value="http://sll-mdilab.net/fhir/StructureDefinition/mdi-patient-device-association"/>
+</sourceReference>
+</resource>
+ <resource>
+<purpose value="profile"/>
+<name value="MDI Practitioner Profile"/>
+ <sourceReference>
+<reference value="http://sll-mdilab.net/fhir/StructureDefinition/mdi-practitioner"/>
+</sourceReference>
+</resource>
+ <resource>
+<purpose value="profile"/>
+<name value="MDI SBAR ReferralRequest"/>
+ <sourceReference>
+<reference value="http://sll-mdilab.net/fhir/StructureDefinition/mdi-sbar-referral-request"/>
+</sourceReference>
+</resource>
+ <resource>
+<purpose value="profile"/>
+<name value="MDI SelfReportedVitalSignObservation"/>
+<description value="A vital sign observation reported by the patient him/her self."/>
+ <sourceReference>
+<reference value="http://sll-mdilab.net/fhir/StructureDefinition/mdi-self-reported-vital-sign-observation"/>
+</sourceReference>
+</resource>
+ <resource>
+<purpose value="profile"/>
+<name value="MDI VitalSignBasedMedicationOrder"/>
+<description value="Represents a medication order which depends on a specified vital sign."/>
+ <sourceReference>
+<reference value="http://sll-mdilab.net/fhir/StructureDefinition/vital-sign-based-medication-order"/>
+</sourceReference>
+</resource>
+</package>
+ <package>
+<name value="Extensions"/>
+ <resource>
+<purpose value="extension"/>
+<name value="MDI AlarmLimits Extension"/>
+ <sourceReference>
+<reference value="http://sll-mdilab.net/fhir/Order#alarmlimits"/>
+</sourceReference>
+</resource>
+ <resource>
+<purpose value="extension"/>
+<name value="MDI ClinicalCategory Extension"/>
+<description value="Describes the clinical category of a DeviceMetric."/>
+ <sourceReference>
+<reference value="http://sll-mdilab.net/clinical-category"/>
+</sourceReference>
+</resource>
+ <resource>
+<purpose value="extension"/>
+<name value="MDI Issuer Extension"/>
+<description value="Base StructureDefinition for Extension Type"/>
+ <sourceReference>
+<reference value="http://sll-mdilab.net/fhir/DeviceUseStatement#issuer"/>
+</sourceReference>
+</resource>
+ <resource>
+<purpose value="extension"/>
+<name value="MDI Organization MedicationList Extension"/>
+<description value="References a list of medications in use by the department."/>
+ <sourceReference>
+<reference value="http://sll-mdilab.net/fhir/Organization#medicationList"/>
+</sourceReference>
+</resource>
+</package>
+ <global>
+<type value="Appointment"/>
+ <profile>
+<reference value="http://sll-mdilab.net/fhir/StructureDefinition/mdi-appointment"/>
+</profile>
+</global>
+ <global>
+<type value="Condition"/>
+ <profile>
+<reference value="http://sll-mdilab.net/fhir/StructureDefinition/mdi-condition"/>
+</profile>
+</global>
+ <global>
+<type value="Encounter"/>
+ <profile>
+<reference value="http://sll-mdilab.net/fhir/StructureDefinition/mdi-encounter"/>
+</profile>
+</global>
+ <global>
+<type value="EpisodeOfCare"/>
+ <profile>
+<reference value="http://sll-mdilab.net/fhir/StructureDefinition/mdi-episode-of-care"/>
+</profile>
+</global>
+ <global>
+<type value="Order"/>
+ <profile>
+<reference value="http://sll-mdilab.net/fhir/StructureDefinition/mdi-metric-order"/>
+</profile>
+</global>
+ <global>
+<type value="DeviceMetric"/>
+ <profile>
+<reference value="http://sll-mdilab.net/fhir/StructureDefinition/mdi-orderable-device-metric"/>
+</profile>
+</global>
+ <global>
+<type value="Organization"/>
+ <profile>
+<reference value="http://sll-mdilab.net/fhir/StructureDefinition/mdi-organization"/>
+</profile>
+</global>
+ <global>
+<type value="DeviceUseStatement"/>
+ <profile>
+<reference value="http://sll-mdilab.net/fhir/StructureDefinition/mdi-patient-device-association"/>
+</profile>
+</global>
+ <global>
+<type value="Practitioner"/>
+ <profile>
+<reference value="http://sll-mdilab.net/fhir/StructureDefinition/mdi-practitioner"/>
+</profile>
+</global>
+ <global>
+<type value="ReferralRequest"/>
+ <profile>
+<reference value="http://sll-mdilab.net/fhir/StructureDefinition/mdi-sbar-referral-request"/>
+</profile>
+</global>
+ <global>
+<type value="MedicationOrder"/>
+ <profile>
+<reference value="http://sll-mdilab.net/fhir/StructureDefinition/vital-sign-based-medication-order"/>
+</profile>
+</global>
+ <page>
+<source value="http://sll-mdilab.net/fhir"/>
+<name value="SLL MDI Lab Implementation Guide"/>
+<kind value="page"/>
+<format value="html"/>
+</page>
+</ImplementationGuide>
